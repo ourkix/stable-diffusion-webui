@@ -52,10 +52,11 @@ var re_extranet_g = /\s+<([^:]+:[^:]+):[\d\.]+>/g;
 function tryToRemoveExtraNetworkFromPrompt(textarea, text){
     var m = text.match(re_extranet)
     if(! m) return false
-
+    
+    var re_extranet_g_old = '//' + re_extranet_g+'//g';
     var partToSearch = m[1]
     var replaced = false
-    var newTextareaText = textarea.value.replaceAll(re_extranet_g, function(found, index){
+    var newTextareaText = textarea.value.replace(re_extranet_g_old, function(found, index){
         m = found.match(re_extranet);
         if(m[1] == partToSearch){
             replaced = true;
